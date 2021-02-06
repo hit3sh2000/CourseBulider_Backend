@@ -15,10 +15,10 @@ require('../middlewares/cloudinary');
 module.exports = {
     adduniversity: async (req, res) => {
         try {
-            // const path ="university/img/" + req.file.filename;
-            // const avatar = await cloudinary.v2.uploader.upload(req.file.path,
-            //     { public_id: path });
-
+            const fileStr = req.body.avatar;
+            const uploadResponse = await cloudinary.v2.uploader.upload(fileStr, {
+                upload_preset: 'ml_default',
+            });
             const {
                 Us_name, Us_email, Us_password, Us_desc, Us_ratings, Us_address
             } = req.body;
@@ -28,7 +28,7 @@ module.exports = {
             university.Us_email = Us_email
             university.Us_password = Us_password
             university.Us_desc = Us_desc
-            // university.Us_img = avatar.url
+            university.Us_img = uploadResponse.secure_url
             university.Us_ratings = Us_ratings
             university.Us_address = Us_address
             university.Us_role = "university"

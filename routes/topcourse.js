@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.post("/", async (req, res) => {
     try {
-        const id = "601d9b3a281e143c348f98c7";
+        const id = "601ff1c46f8fd9257cd7ab21";
         const cid = req.body.cid;
         const topcourses = await Topcourses.findById(id);
         topcourses.courses.push(cid)
@@ -24,7 +24,7 @@ router.post("/", async (req, res) => {
 });
 router.get("/", async (req, res) => {
     try {
-        const id = "601d9b3a281e143c348f98c7";
+        const id = "601ff1c46f8fd9257cd7ab21";
         const topcourses = await Topcourses.findById(id).populate("courses");
         res.json(topcourses.courses)
 

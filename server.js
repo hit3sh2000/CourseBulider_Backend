@@ -60,7 +60,7 @@ app.use('/topcourse',topcourse);
 
 //after payment
 app.post("/callback", async (req, res) => {
-  res.redirect("http://localhost:3001/paymentstatus")
+  res.redirect("http://localhost:3000/paymentstatus")
 });
 
 const PORT = process.env.PORT || 3000;

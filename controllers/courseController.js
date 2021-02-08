@@ -62,17 +62,14 @@ module.exports = {
     byUniversity: async (req, res) => {
         try {
             const uid = req.params.uid;
-
-            const fileStr = req.body.course_avatar;
-            const uploadResponse = await cloudinary.v2.uploader.upload(fileStr, {
-                upload_preset: 'ml_default',
-            });
-
             const {
                 C_name, C_desc, C_ratings, C_reviews, C_duration, C_price, category,educatorinfo
             } = req.body;
-            
             if (!await Course.findOne({ C_name })) {
+                const fileStr = req.body.course_avatar;
+                const uploadResponse = await cloudinary.v2.uploader.upload(fileStr, {
+                    upload_preset: 'ml_default',
+                });
                 const course = new Course();
                 course.C_name = C_name
                 course.C_slug = slugify(C_name)
@@ -81,18 +78,12 @@ module.exports = {
                 course.C_duration = C_duration
                 course.C_price = C_price
                 course.category = category
-                course.Universities.push(uid)
                 course.save();
             }
-
             const university = await University.findById(uid);
-            
-
             const course1 = await Course.findOne({ C_name })
-            console.log(course1);
+            course1.Universities.push(uid)
             const educator = await Educator.findOne({ E_name:educatorinfo })
-            console.log(educator);
-
             const temp = {
                 course: course1._id,
                 Educator: educator._id
@@ -100,8 +91,6 @@ module.exports = {
             university.courses.push(temp)
             console.log(university);
             university.save();
-
-
         } catch (err) {
             res.send(err)
         }

@@ -89,7 +89,7 @@ module.exports = {
                 Educator: educator._id
             }
             university.courses.push(temp)
-            console.log(university);
+            course1.save();
             university.save();
         } catch (err) {
             res.send(err)

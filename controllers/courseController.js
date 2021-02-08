@@ -91,6 +91,7 @@ module.exports = {
             university.courses.push(temp)
             course1.save();
             university.save();
+            res.json({course1,university})
         } catch (err) {
             res.send(err)
         }

@@ -60,7 +60,7 @@ app.use('/topcourse',topcourse);
 
 //after payment
 app.post("/callback", async (req, res) => {
-  res.redirect("http://localhost:3000/paymentstatus")
+  res.redirect("https://cours3builder.herokuapp.com/paymentstatus")
 });
 
 const PORT = process.env.PORT || 3000;

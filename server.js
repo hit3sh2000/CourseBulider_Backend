@@ -59,7 +59,7 @@ app.use('/topcourse',topcourse);
 
 
 //after payment
-app.post("/callback", async (req, res) => {
+app.get("/callback", async (req, res) => {
   res.redirect("https://cours3builder.herokuapp.com/paymentstatus")
 });
 
